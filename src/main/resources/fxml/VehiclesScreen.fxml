@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation_layer.SceneController">
+   <children>
+      <ImageView fitHeight="768.0" fitWidth="1024.0">
+         <image>
+            <Image url="@graphics/background.png" />
+         </image>
+      </ImageView>
+      <VBox layoutY="-1.0" prefHeight="769.0" prefWidth="183.0">
+         <children>
+            <Label fx:id="greetings" prefHeight="17.0" prefWidth="199.0" text="Vítejte, admin!">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="225.0" text="Dnes je:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="time" alignment="CENTER" contentDisplay="CENTER" prefHeight="40.0" prefWidth="183.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label fx:id="date" alignment="CENTER" prefHeight="17.0" prefWidth="203.0">
+               <font>
+                  <Font size="24.0" />
+               </font>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="248.0" />
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="67.0" fitWidth="69.0" layoutX="57.0" preserveRatio="true">
+                     <image>
+                        <Image url="@graphics/wrench.png" />
+                     </image>
+                  </ImageView>
+               </children>
+            </AnchorPane>
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="200.0" text="Odhlásit se" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#myReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#myVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#aboutUs" prefHeight="26.0" prefWidth="237.0" text="O nás" />
+         </children>
+      </VBox>
+      <TableView fx:id="vehicleTable" layoutX="198.0" layoutY="129.0" prefHeight="524.0" prefWidth="457.0">
+      </TableView>
+      <VBox layoutX="654.0" layoutY="130.0" prefHeight="522.0" prefWidth="269.0">
+         <children>
+            <TextField fx:id="makeAdd" alignment="CENTER" promptText="Značka vozidla" />
+            <TextField fx:id="modelAdd" alignment="CENTER" promptText="Model vozidla" />
+            <TextField fx:id="yearAdd" alignment="CENTER" promptText="Rok výroby" />
+            <TextField fx:id="vinAdd" alignment="CENTER" promptText="VIN kód" />
+            <TextField fx:id="plateAdd" alignment="CENTER" promptText="Poznávací značka" />
+            <AnchorPane prefHeight="46.0" prefWidth="269.0">
+               <children>
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="10.0" mnemonicParsing="false" onAction="#AddVehicle" text="Přidat vozidlo" />
+               </children>
+            </AnchorPane>
+         </children>
+      </VBox>
+      <TextField fx:id="searchVehField" layoutX="206.0" layoutY="57.0" prefHeight="26.0" prefWidth="298.0" promptText="Pro vyhledání napište hledaný výraz" />
+      <Button layoutX="512.0" layoutY="58.0" mnemonicParsing="false" onAction="#filterMyVehicles" text="Vyhledat" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,4 @@
+0|admin admin
+1|martin martin
+2|franta franta
+3|tomas heslo
