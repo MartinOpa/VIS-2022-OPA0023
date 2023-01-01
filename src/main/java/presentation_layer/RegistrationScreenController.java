@@ -32,8 +32,8 @@ public class RegistrationScreenController extends LoginScreenController {
         if (password.equals(passwordCheck)) {
             if (ID > 0) {
                 client.storeUser(ID, login, password);
-                this.client = new Client(ID, login, firstName, lastName, address, phone);
-                this.client.getClientDB().save(this.client);
+                client = new Client(ID, login, firstName, lastName, address, phone);
+                client.save(client);
                 
                 FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/LoginScreen.fxml"));
                 root = FXMLLoader.load();

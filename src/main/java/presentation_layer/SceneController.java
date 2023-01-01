@@ -118,7 +118,7 @@ public class SceneController implements Initializable {
         
         ClientHolder holder = ClientHolder.getInstance();
         client = holder.getClient();
-        client.setReservationList(client.getReservationDB().load(client));
+        client.setReservationList(client);
 
         reservationTable = controller.getReservationTable();
         
@@ -150,7 +150,7 @@ public class SceneController implements Initializable {
         
         ClientHolder holder = ClientHolder.getInstance();
         client = holder.getClient();
-        client.setVehicleList(client.getVehicleDB().load(client));
+        client.setVehicleList(client);
         
         pickTime.getItems().addAll("8:00", "9:00", "10:00", "11:00", "13:00", "14:00", "15:00");
         
@@ -166,6 +166,37 @@ public class SceneController implements Initializable {
         stage.show();
     }
     
+    public void filterMyReservations(ActionEvent event) throws IOException { 
+        String parameter = searchResField.getText();
+        
+        FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/ReservationsScreen.fxml"));
+        root = FXMLLoader.load();
+        SceneController controller = FXMLLoader.getController();
+        
+        ClientHolder holder = ClientHolder.getInstance();
+        client = holder.getClient();
+        client.setReservationList(client);
+
+        reservationTable = controller.getReservationTable();
+        
+        TableColumn<Reservation, String> dateTime = new TableColumn<>("Datum a čas rezervace");
+        dateTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
+        TableColumn<Reservation, String> vin = new TableColumn<>("VIN kód vozidla");
+        vin.setCellValueFactory(new PropertyValueFactory<>("vin"));
+        TableColumn<Reservation, String> issue = new TableColumn<>("Popsaný problém");
+        issue.setCellValueFactory(new PropertyValueFactory<>("issue"));
+
+        reservationTable.getColumns().addAll(dateTime, vin, issue);
+        
+        ObservableList<Reservation> data = FXCollections.observableArrayList(client.filter(parameter, client));
+        reservationTable.setItems(data);
+        
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+    
     public void myVehicles(ActionEvent event) throws IOException {
         FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/VehiclesScreen.fxml"));
         root = FXMLLoader.load();
@@ -173,8 +204,8 @@ public class SceneController implements Initializable {
         
         ClientHolder holder = ClientHolder.getInstance();
         client = holder.getClient();
-        client.setVehicleList(client.getVehicleDB().load(client));
-        holder.setClient(client.getClientDB().load(holder.getClient()));
+        client.setVehicleList(client);
+        //redundance? holder.setClient(client.getClientDB().load(holder.getClient()));
 
         vehicleTable = controller.getVehicleTable();
         

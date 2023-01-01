@@ -51,23 +51,36 @@ public class Client extends User {
         return this.VehicleDB;
     }
     
-    public void setVehicleList(List<Vehicle> list) {
-        this.VehicleList = list;
+    public void setVehicleList(Client client) {
+        this.VehicleList = client.getVehicleDB().load(client);
     }
     
     public List<Vehicle> getVehicleList() {
         return this.VehicleList;
     }
     
-    public void setReservationList(List<Reservation> list) {
-        this.ReservationList = list;
+    public void setReservationList(Client client) {
+        this.ReservationList = client.getReservationDB().load(client);
     }
     
     public List<Reservation> getReservationList() {
         return this.ReservationList;
     }
+    
+    public void save(Client client) {
+        client.getClientDB().save(client);
+    }
+    
+    public void saveRes(Client client, Reservation reservation) {
+        client.getReservationDB().save(reservation);
+    }
+    
+    public void saveVeh(Client client, Vehicle vehicle) {
+        client.getVehicleDB().save(vehicle);
+    }
 
-    public List<Vehicle> filter(List<Vehicle> list, String parameter) {
+    public List<Vehicle> filter(Client client, String parameter) {
+        List<Vehicle> list = client.getVehicleList();
         List<Vehicle> filteredList = new LinkedList<>();
         for (Vehicle vehicle : list) {
             if(vehicle.getLogin().matches(".*" + parameter + ".*") || vehicle.getMake().matches(".*" + parameter + ".*") || vehicle.getModel().matches(".*" + parameter + ".*")
@@ -79,7 +92,8 @@ public class Client extends User {
         return filteredList;
     }
     
-    public List<Reservation> filter(String parameter, List<Reservation> list) {
+    public List<Reservation> filter(String parameter, Client client) {
+        List<Reservation> list = client.getReservationList();
         List<Reservation> filteredList = new LinkedList<>();
         for (Reservation reservation : list) {
             if(reservation.getLogin().matches(".*" + parameter + ".*") || reservation.getDateTime().matches(".*" + parameter + ".*")

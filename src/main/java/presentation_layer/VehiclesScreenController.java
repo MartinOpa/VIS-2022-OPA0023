@@ -24,8 +24,8 @@ public class VehiclesScreenController extends SceneController {
         
         ClientHolder holder = ClientHolder.getInstance();
         client = holder.getClient();
-        client.setVehicleList(client.getVehicleDB().load(client));
-        holder.setClient(client.getClientDB().load(holder.getClient()));
+        client.setVehicleList(client);
+        holder.setClient(client);
 
         vehicleTable = controller.getVehicleTable();
         
@@ -42,7 +42,7 @@ public class VehiclesScreenController extends SceneController {
         
         vehicleTable.getColumns().addAll(make, model, year, vin, plate);
         
-        ObservableList<Vehicle> data = FXCollections.observableArrayList(client.filter(client.getVehicleList(), parameter));
+        ObservableList<Vehicle> data = FXCollections.observableArrayList(client.filter(client, parameter));
         vehicleTable.setItems(data);
         
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -60,9 +60,9 @@ public class VehiclesScreenController extends SceneController {
         client = holder.getClient();
         
         Vehicle newVehicle = new Vehicle(client.getLogin(), makeAdd.getText(), modelAdd.getText(), yearAdd.getText(), vinAdd.getText(), plateAdd.getText());
-        client.getVehicleDB().save(newVehicle);
-        client.setVehicleList(client.getVehicleDB().load(client));
-        holder.setClient(client.getClientDB().load(holder.getClient()));
+        client.saveVeh(client, newVehicle);
+        client.setVehicleList(client);
+        holder.setClient(client);
         
         vehicleTable = controller.getVehicleTable();
         
