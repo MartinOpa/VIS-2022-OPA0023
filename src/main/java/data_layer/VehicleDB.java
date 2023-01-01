@@ -96,7 +96,7 @@ public class VehicleDB {
 
     private Connection getConnection() {
         try {
-            return DriverManager.getConnection("jdbc:derby:vehicle;create=true");
+            return DriverManager.getConnection("jdbc:derby:derbydb;create=true");
         } catch (SQLException e) {
             e.printStackTrace();
             return null;

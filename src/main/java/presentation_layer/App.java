@@ -55,9 +55,6 @@ public class App extends Application {
             e.printStackTrace();
         }
         
-        SceneController controller = new SceneController();
-        controller.setClient(client);
-        
         Scene loginScreen = new Scene(login);  
         primaryStage.setScene(loginScreen);
         primaryStage.show();

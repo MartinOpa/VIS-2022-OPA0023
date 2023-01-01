@@ -1,15 +1,5 @@
 ----------------------------------------------------------------
-Sat Dec 31 23:29:49 CET 2022D001 : [0] The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046), [1] a816c00e-0185-6a4e-3667-0000074c4090, [2] /Users/Splat/Desktop/java1_2022_opa0023/client, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@66d33a, [4] file:/Users/Splat/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
-java.vendor=Eclipse Adoptium
-java.runtime.version=17.0.4.1+1
-user.dir=/Users/Splat/Desktop/java1_2022_opa0023
-os.name=Mac OS X
-os.arch=x86_64
-os.version=11.7
-derby.system.home=null
-C005 : [0] 
-----------------------------------------------------------------
-Sat Dec 31 23:29:49 CET 2022D001 : [0] The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046), [1] 40348015-0185-6a4e-3667-0000074c4090, [2] /Users/Splat/Desktop/java1_2022_opa0023/vehicle, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@66d33a, [4] file:/Users/Splat/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
+Sun Jan 01 20:47:25 CET 2023D001 : [0] The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046), [1] a816c00e-0185-6edf-e51a-0000074a06b0, [2] /Users/Splat/Desktop/java1_2022_opa0023/derbydb, [3] jdk.internal.loader.ClassLoaders$AppClassLoader@66d33a, [4] file:/Users/Splat/.m2/repository/org/apache/derby/derby/10.16.1.1/derby-10.16.1.1.jar
 java.vendor=Eclipse Adoptium
 java.runtime.version=17.0.4.1+1
 user.dir=/Users/Splat/Desktop/java1_2022_opa0023
