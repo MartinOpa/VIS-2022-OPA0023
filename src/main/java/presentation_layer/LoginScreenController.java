@@ -66,56 +66,18 @@ public class LoginScreenController extends SceneController {
     }
     
     public void resetPassword(ActionEvent event) throws IOException {
+        boolean success = false;
         FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/ForgotPassword.fxml"));
         root = FXMLLoader.load();
         
         String loginInput = loginFieldReset.getText();
         String newpassword = passwordFieldReset.getText();
         
-        int saveID = 0;
-        int ID = -1;
-        String login = "";
-        boolean success = false;
+        Client client = new Client();
         
-        Path p = Paths.get("./src/main/resources/users.txt");
-        List<String> result = new ArrayList<String>();
-        
-        try (InputStream in = Files.newInputStream(p);
-            BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
-            String line = null;
-            while ((line = reader.readLine()) != null) {
-                int space = line.indexOf(" ");
-                int divider = line.indexOf("|");
-                ID = Integer.parseInt(line.substring(0, divider));
-                login = line.substring(divider+1, space);                
-                if (login.equals(loginInput)) {
-                    saveID = ID;
-                    success = true;
-                } else result.add(line);
-            }
-            in.close();
-        } catch (IOException x) {
-            System.err.println(x);
-        }
+        success = client.tryPasswordReset(loginInput, newpassword);
         
         if (success) {
-            String write = "./src/main/resources/users.txt";
-            
-            FileWriter out = new FileWriter(write);
-            out.write("");
-            out.close();
-            
-            try {
-                out = new FileWriter(write, true);
-                for (String element : result) {
-                    out.write(element + "\n");
-                }
-                out.write(Integer.toString(ID) + "|" + loginInput + " " + newpassword); 
-                out.close();           
-            } catch (IOException x) {
-                System.err.println(x);
-            }
-            
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setContentText("Úspěch, nyní se můžete přihlásit");
             alert.show();

@@ -169,4 +169,54 @@ public class Client extends User {
             System.err.println(x);
         }
     }
+    
+    public boolean tryPasswordReset(String loginInput, String newpassword) {
+        int ID = -1;
+        int saveID = -1;
+        String login = "";
+        boolean success = false;
+        Path p = Paths.get("./src/main/resources/users.txt");
+        List<String> result = new ArrayList<String>();
+        
+        try (InputStream in = Files.newInputStream(p);
+            BufferedReader reader = new BufferedReader(new InputStreamReader(in))) {
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                int space = line.indexOf(" ");
+                int divider = line.indexOf("|");
+                ID = Integer.parseInt(line.substring(0, divider));
+                login = line.substring(divider+1, space);                
+                if (login.equals(loginInput)) {
+                    saveID = ID;
+                    success = true;
+                } else result.add(line);
+            }
+            in.close();
+        } catch (IOException x) {
+            System.err.println(x);
+        }
+        
+        if (!success) {
+            return false;
+        }
+
+        String write = "./src/main/resources/users.txt";
+        
+        try {
+            FileWriter out = new FileWriter(write);
+            out.write("");
+            out.close(); 
+
+            out = new FileWriter(write, true);
+            for (String element : result) {
+                out.write(element + "\n");
+            }
+            out.write(Integer.toString(saveID) + "|" + loginInput + " " + newpassword); 
+            out.close();           
+        } catch (IOException x) {
+            System.err.println(x);
+        }
+        
+        return true;
+    }
 }
