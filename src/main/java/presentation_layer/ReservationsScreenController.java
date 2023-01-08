@@ -53,6 +53,8 @@ public class ReservationsScreenController extends SceneController {
             }
         }
         
+        success = client.checkIfAvailable(dateTime);
+        
         if (success) {
             client.saveRes(new Reservation(client.getLogin(), dateTime, vehicle, describeProblem.getText()));
             holder.setClient(client);
@@ -60,6 +62,10 @@ public class ReservationsScreenController extends SceneController {
             Alert alert = new Alert(AlertType.CONFIRMATION);
             alert.setContentText("Rezervace byla úspěšně vytvořena");
             alert.show(); 
+        } else {
+            Alert alert = new Alert(AlertType.ERROR);
+            alert.setContentText("Tento čas rezervace je již obsazen\nVyberte, prosím, jiný čas");
+            alert.show();
         }
     }
     

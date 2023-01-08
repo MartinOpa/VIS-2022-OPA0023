@@ -59,6 +59,18 @@ public class Client extends User {
         return this.ReservationList;
     }
     
+    public boolean checkIfAvailable(String dateTime) {
+        List<Reservation> tempList = this.ReservationDB.load(new Client(0, "admin", null, null, null, 0));
+        
+        for (Reservation element : tempList) {
+            if (dateTime.equals(element.getDateTime())) {
+                return false;
+            }
+        }
+        
+        return true;
+    }
+    
     public void save(Client client) {
         this.ClientDB.save(client);
     }
