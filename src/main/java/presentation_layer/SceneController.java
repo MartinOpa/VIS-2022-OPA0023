@@ -17,10 +17,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.scene.Node;
@@ -48,48 +46,6 @@ public class SceneController implements Initializable {
     @FXML
     private Label date;
     @FXML
-    protected TextField loginField;
-    @FXML
-    protected TextField loginFieldReset;
-    @FXML
-    protected TextField loginRegField;
-    @FXML
-    protected TextField firstNameRegField;
-    @FXML
-    protected TextField lastNameRegField;
-    @FXML
-    protected TextField addressRegField1;
-    @FXML
-    protected TextField addressRegField2;
-    @FXML
-    protected TextField addressRegField3;
-    @FXML
-    protected TextField phoneRegField;
-    @FXML
-    protected TextField makeAdd;
-    @FXML
-    protected TextField modelAdd;
-    @FXML
-    protected TextField yearAdd;
-    @FXML
-    protected TextField vinAdd;
-    @FXML
-    protected TextField plateAdd;
-    @FXML
-    protected TextField searchResField;
-    @FXML
-    protected TextField searchVehField;
-    @FXML
-    protected TextField describeProblem;
-    @FXML
-    protected PasswordField passwordField;
-    @FXML
-    protected PasswordField passwordFieldReset;
-    @FXML
-    protected PasswordField passwordRegField;
-    @FXML
-    protected PasswordField passwordCheckRegField;
-    @FXML
     protected TableView<Vehicle> vehicleTable;
     @FXML
     protected TableView<Reservation> reservationTable;
@@ -111,7 +67,8 @@ public class SceneController implements Initializable {
         stage.show();
     }
     
-    public void myReservations(ActionEvent event) throws IOException {  
+    @SuppressWarnings("unchecked")
+    public void showReservations(ActionEvent event) throws IOException {  
         FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/ReservationsScreen.fxml"));
         root = FXMLLoader.load();
         SceneController controller = FXMLLoader.getController();
@@ -140,7 +97,7 @@ public class SceneController implements Initializable {
         stage.show();
     }
     
-    public void newReservation(ActionEvent event) throws IOException {
+    public void createReservation(ActionEvent event) throws IOException {
         FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/NewReservationScreen.fxml"));
         root = FXMLLoader.load();
         SceneController controller = FXMLLoader.getController();
@@ -166,38 +123,8 @@ public class SceneController implements Initializable {
         stage.show();
     }
     
-    public void filterMyReservations(ActionEvent event) throws IOException { 
-        String parameter = searchResField.getText();
-        
-        FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/ReservationsScreen.fxml"));
-        root = FXMLLoader.load();
-        SceneController controller = FXMLLoader.getController();
-        
-        ClientHolder holder = ClientHolder.getInstance();
-        client = holder.getClient();
-        client.setReservationList(client);
-
-        reservationTable = controller.getReservationTable();
-        
-        TableColumn<Reservation, String> dateTime = new TableColumn<>("Datum a čas rezervace");
-        dateTime.setCellValueFactory(new PropertyValueFactory<>("dateTime"));
-        TableColumn<Reservation, String> vin = new TableColumn<>("VIN kód vozidla");
-        vin.setCellValueFactory(new PropertyValueFactory<>("vin"));
-        TableColumn<Reservation, String> issue = new TableColumn<>("Popsaný problém");
-        issue.setCellValueFactory(new PropertyValueFactory<>("issue"));
-
-        reservationTable.getColumns().addAll(dateTime, vin, issue);
-        
-        ObservableList<Reservation> data = FXCollections.observableArrayList(client.filter(parameter, client));
-        reservationTable.setItems(data);
-        
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-    
-    public void myVehicles(ActionEvent event) throws IOException {
+    @SuppressWarnings("unchecked")
+    public void showVehicles(ActionEvent event) throws IOException {
         FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/VehiclesScreen.fxml"));
         root = FXMLLoader.load();
         SceneController controller = FXMLLoader.getController();
@@ -205,7 +132,6 @@ public class SceneController implements Initializable {
         ClientHolder holder = ClientHolder.getInstance();
         client = holder.getClient();
         client.setVehicleList(client);
-        //redundance? holder.setClient(client.getClientDB().load(holder.getClient()));
 
         vehicleTable = controller.getVehicleTable();
         
@@ -231,7 +157,7 @@ public class SceneController implements Initializable {
         stage.show();
     }
     
-    public void aboutUs(ActionEvent event) throws IOException {
+    public void showBio(ActionEvent event) throws IOException {
         FXMLLoader FXMLLoader = new FXMLLoader(App.class.getResource("/fxml/AboutUs.fxml"));
         root = FXMLLoader.load();
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -240,6 +166,7 @@ public class SceneController implements Initializable {
         stage.show();
     }
     
+    @SuppressWarnings({"all"})
     private void timenow() {
         Thread thread = new Thread(() ->{
             SimpleDateFormat sdf = new SimpleDateFormat("HH:mm:ss");
@@ -247,19 +174,25 @@ public class SceneController implements Initializable {
             ClientHolder holder = ClientHolder.getInstance();
             client = holder.getClient();
             String hello = "Vítejte, " + client.getFirstName() + "!";
+            
             while(!stop) {
                 try {
-                    Thread.sleep(500);
+                    Thread.sleep(100);
                 } catch(Exception e) {
-                    System.out.println(e);
+                    //System.out.println(e);
                 }
                 time = getTime();
                 String timenow = sdf.format(new Date());
                 String datenow = dmy.format(new Date());
                 Platform.runLater(()->{
+                try {
                     time.setText(timenow);
                     date.setText(datenow);
-                    greetings.setText(hello);
+                    greetings.setText(hello); 
+                } catch(Exception e) {
+                    //System.out.println(e);
+                }
+                    
                 });
             }
         });
@@ -275,6 +208,7 @@ public class SceneController implements Initializable {
         stop = true;
     }
     
+    @SuppressWarnings({"all"})
     public Label getTime() {
         return this.time;
     }

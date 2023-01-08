@@ -1,18 +1,40 @@
 package presentation_layer;
 
 import java.io.IOException;
-
-import domain_layer.Address;
-import domain_layer.Client;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+import domain_layer.Address;
+import domain_layer.Client;
+
 public class RegistrationScreenController extends LoginScreenController {
+    @FXML
+    protected TextField loginRegField;
+    @FXML
+    protected TextField firstNameRegField;
+    @FXML
+    protected TextField lastNameRegField;
+    @FXML
+    protected TextField addressRegField1;
+    @FXML
+    protected TextField addressRegField2;
+    @FXML
+    protected TextField addressRegField3;
+    @FXML
+    protected TextField phoneRegField;
+    @FXML
+    protected PasswordField passwordRegField;
+    @FXML
+    protected PasswordField passwordCheckRegField;
+    
     public void register(ActionEvent event) throws IOException {
         Client client = new Client();
         int ID = 0;

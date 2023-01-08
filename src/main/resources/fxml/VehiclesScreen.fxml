@@ -50,10 +50,10 @@
                </children>
             </AnchorPane>
             <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="200.0" text="Odhlásit se" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#myReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#myVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
-            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#aboutUs" prefHeight="26.0" prefWidth="237.0" text="O nás" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#createReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
+            <Button alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" onAction="#showBio" prefHeight="26.0" prefWidth="237.0" text="O nás" />
          </children>
       </VBox>
       <TableView fx:id="vehicleTable" layoutX="198.0" layoutY="129.0" prefHeight="524.0" prefWidth="457.0">
@@ -67,7 +67,7 @@
             <TextField fx:id="plateAdd" alignment="CENTER" promptText="Poznávací značka" />
             <AnchorPane prefHeight="46.0" prefWidth="269.0">
                <children>
-                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="10.0" mnemonicParsing="false" onAction="#AddVehicle" text="Přidat vozidlo" />
+                  <Button alignment="CENTER" contentDisplay="CENTER" layoutX="89.0" layoutY="10.0" mnemonicParsing="false" onAction="#addVehicle" text="Přidat vozidlo" />
                </children>
             </AnchorPane>
          </children>

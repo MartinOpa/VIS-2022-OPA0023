@@ -51,10 +51,10 @@
                </children>
             </AnchorPane>
             <Button mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="200.0" text="Odhlásit se" />
-            <Button mnemonicParsing="false" onAction="#myReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
-            <Button mnemonicParsing="false" onAction="#newReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
-            <Button mnemonicParsing="false" onAction="#myVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
-            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="26.0" prefWidth="237.0" text="O nás" />
+            <Button mnemonicParsing="false" onAction="#showReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
+            <Button mnemonicParsing="false" onAction="#createReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
+            <Button mnemonicParsing="false" onAction="#showVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
+            <Button mnemonicParsing="false" onAction="#showBio" prefHeight="26.0" prefWidth="237.0" text="O nás" />
          </children>
       </VBox>
       <ChoiceBox fx:id="pickVehicle" layoutX="370.0" layoutY="158.0" prefHeight="26.0" prefWidth="299.0" />

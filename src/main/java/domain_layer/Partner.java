@@ -1,7 +1,5 @@
 package domain_layer;
 
-import java.util.List;
-
 public class Partner extends User {
     Partner(int ID, String login, String firstName, String lastName, Address address, int phone) {
         this.ID = ID;

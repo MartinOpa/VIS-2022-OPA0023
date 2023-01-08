@@ -1,26 +1,29 @@
 package presentation_layer;
 
-import java.io.BufferedReader;
-import java.io.FileWriter;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
-
-import domain_layer.Client;
 import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.stage.Stage;
 
+import domain_layer.Client;
+
 public class LoginScreenController extends SceneController {
+    @FXML
+    protected TextField loginField;
+    @FXML
+    protected TextField loginFieldReset;
+    @FXML
+    protected PasswordField passwordField;
+    @FXML
+    protected PasswordField passwordFieldReset;
+    
     public void logIn(ActionEvent event) throws IOException {
         boolean success = false;
         client = new Client();

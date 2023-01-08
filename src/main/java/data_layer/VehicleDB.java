@@ -55,6 +55,19 @@ public class VehicleDB {
         
         return cleanVehicles;
     }
+    
+    public List<Vehicle> filter(Client client, String parameter) {
+        List<Vehicle> list = client.getVehicleList();
+        List<Vehicle> filteredList = new LinkedList<>();
+        for (Vehicle vehicle : list) {
+            if(vehicle.getLogin().matches(".*" + parameter + ".*") || vehicle.getMake().matches(".*" + parameter + ".*") || vehicle.getModel().matches(".*" + parameter + ".*")
+                    || vehicle.getVin().matches(".*" + parameter + ".*") || vehicle.getYear().matches(".*" + parameter + ".*") || vehicle.getPlate().matches(".*" + parameter + ".*")) {
+                filteredList.add(vehicle);
+            }
+        }
+        
+        return filteredList;
+    }
 
     public void save(Vehicle vehicle) {
         try( Connection con = getConnection()) {

@@ -66,6 +66,19 @@ public class ReservationsDB {
         }
         
     }
+    
+    public List<Reservation> filter(String parameter, Client client) {
+        List<Reservation> list = client.getReservationList();
+        List<Reservation> filteredList = new LinkedList<>();
+        for (Reservation reservation : list) {
+            if(reservation.getLogin().matches(".*" + parameter + ".*") || reservation.getDateTime().matches(".*" + parameter + ".*")
+                    || reservation.getVin().matches(".*" + parameter + ".*") || reservation.getIssue().matches(".*" + parameter + ".*")) {
+                filteredList.add(reservation);
+            }
+        }
+        
+        return filteredList;
+    }
 
     private void initTable(Connection con) {
         Statement stmt;

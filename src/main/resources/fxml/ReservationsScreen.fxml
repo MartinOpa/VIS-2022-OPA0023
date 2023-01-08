@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation_layer.SceneController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1024.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="presentation_layer.ReservationsScreenController">
    <children>
       <ImageView fitHeight="768.0" fitWidth="1024.0">
          <image>
@@ -50,10 +50,10 @@
                </children>
             </AnchorPane>
             <Button mnemonicParsing="false" onAction="#logOut" prefHeight="26.0" prefWidth="200.0" text="Odhlásit se" />
-            <Button mnemonicParsing="false" onAction="#myReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
-            <Button mnemonicParsing="false" onAction="#newReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
-            <Button mnemonicParsing="false" onAction="#myVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
-            <Button mnemonicParsing="false" onAction="#aboutUs" prefHeight="26.0" prefWidth="237.0" text="O nás" />
+            <Button mnemonicParsing="false" onAction="#showReservations" prefHeight="26.0" prefWidth="239.0" text="Spravovat rezervace" />
+            <Button mnemonicParsing="false" onAction="#createReservation" prefHeight="26.0" prefWidth="231.0" text="Nová rezervace" />
+            <Button mnemonicParsing="false" onAction="#showVehicles" prefHeight="26.0" prefWidth="196.0" text="Spravovat vozidla" />
+            <Button mnemonicParsing="false" onAction="#showBio" prefHeight="26.0" prefWidth="237.0" text="O nás" />
          </children>
       </VBox>
       <TableView fx:id="reservationTable" layoutX="206.0" layoutY="93.0" prefHeight="583.0" prefWidth="774.0" />
