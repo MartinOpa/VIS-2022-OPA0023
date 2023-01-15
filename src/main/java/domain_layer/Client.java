@@ -29,6 +29,7 @@ public class Client extends User {
         this.ClientDB = new ClientDB();
         this.ReservationDB = new ReservationsDB();
         this.VehicleDB = new VehicleDB();
+        this.LoginValidation = new LoginValidation();
     }
     
     public ClientDB getClientDB() {

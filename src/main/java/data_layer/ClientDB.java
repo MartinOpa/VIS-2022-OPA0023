@@ -58,7 +58,6 @@ public class ClientDB {
 
     public void save(Client client) {
         try( Connection con = getConnection()) {
-            //getConnection().createStatement().execute("DELETE FROM score");
             PreparedStatement pstm = con.prepareStatement("INSERT INTO client (login, firstName, lastName, street, city, postalCode, phone) VALUES (?, ?, ?, ?, ?, ?, ?)");
             Address address = client.getAddress();
             String street = address.getStreet();

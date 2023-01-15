@@ -1,13 +1,8 @@
 package domain_layer;
 
-public class Partner extends User {
+public class Partner extends Client {
     Partner(int ID, String login, String firstName, String lastName, Address address, int phone) {
-        this.ID = ID;
+        super(ID, login, firstName, lastName, address, phone);
         this.accountType = 1;
-        this.login = login;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.address = address;
-        this.phone = phone;
     }
 }
