@@ -10,6 +10,7 @@ Jedná se o jednoduchý rezervační systém autoservisu psaný v Javě za využ
 
 Jednoduché uživatelské rozhraní za využití javafx s formátováním rozhraní pomocí fxml souborů, obsahuje všechny potřebné ovladače pro jednotlivé scény.
 Vrstva se nachází v src/main/java/presentation_layer, fxml soubory v src/main/java/resources/fxml.
+Společně s doménovou vrstvou a fxml soubory tvoří vzor Model/View/Controller.
 
 ### Doménová vrstva
 
@@ -27,7 +28,7 @@ Jednotlivé třídy:
 
 ### Datová vrstva
 
-Obsahuje připojení na databázi ApacheDerby a metody potřebné pro její využití a filtrování výsledků.
+Obsahuje připojení na databázi ApacheDerby a metody potřebné pro její využití a filtrování výsledků. Obsahuje třídy dle vzoru Data mapper.
 Nachází se v src/main/java/data_layer.
 
 ## Login interface
