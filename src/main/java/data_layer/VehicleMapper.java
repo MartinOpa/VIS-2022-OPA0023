@@ -12,8 +12,8 @@ import java.util.List;
 import domain_layer.Vehicle;
 import domain_layer.Client;
 
-public class VehicleDB {
-    public VehicleDB() {
+public class VehicleMapper {
+    public VehicleMapper() {
         
         try(Connection con = getConnection()) {
             initTable(con);
@@ -43,10 +43,12 @@ public class VehicleDB {
             e.printStackTrace();
         }
         
+        // if(admin) -> return all
         if (loginInput.equals("admin")) {
             return vehicles;
         }
         
+        // get vehicles by user login
         for (Vehicle element : vehicles) {
             if (element.getLogin().equals(loginInput)) {
                 cleanVehicles.add(element);
@@ -57,11 +59,15 @@ public class VehicleDB {
     }
     
     public List<Vehicle> filter(Client client, String parameter) {
+        // filter the logged in user's List<Vehicle> by the given parameter
         List<Vehicle> list = client.getVehicleList();
         List<Vehicle> filteredList = new LinkedList<>();
         for (Vehicle vehicle : list) {
-            if(vehicle.getLogin().matches(".*" + parameter + ".*") || vehicle.getMake().matches(".*" + parameter + ".*") || vehicle.getModel().matches(".*" + parameter + ".*")
-                    || vehicle.getVin().matches(".*" + parameter + ".*") || vehicle.getYear().matches(".*" + parameter + ".*") || vehicle.getPlate().matches(".*" + parameter + ".*")) {
+            if(vehicle.getMake().matches(".*" + parameter + ".*")
+                    || vehicle.getModel().matches(".*" + parameter + ".*")
+                    || vehicle.getVin().matches(".*" + parameter + ".*")
+                    || vehicle.getYear().matches(".*" + parameter + ".*")
+                    || vehicle.getPlate().matches(".*" + parameter + ".*")) {
                 filteredList.add(vehicle);
             }
         }
@@ -71,9 +77,8 @@ public class VehicleDB {
 
     public void save(Vehicle vehicle) {
         try( Connection con = getConnection()) {
-            //getConnection().createStatement().execute("DELETE FROM score");
             PreparedStatement pstm = con.prepareStatement("INSERT INTO vehicle (login, make, model, modelyear, vin, plate) VALUES (?, ?, ?, ?, ?, ?)");
-                pstm.setString(1, vehicle.getLogin());
+                pstm.setString(1, vehicle.getLogin()); // FK
                 pstm.setString(2, vehicle.getMake());
                 pstm.setString(3, vehicle.getModel());
                 pstm.setString(4, vehicle.getYear());
@@ -84,6 +89,18 @@ public class VehicleDB {
             e.printStackTrace();
         }
         
+    }
+    
+    public void delete(Vehicle vehicle) {
+        try( Connection con = getConnection()) {
+            // update client info
+            PreparedStatement pstm = con.prepareStatement("DELETE FROM vehicle WHERE vin = ? AND login = ?");
+                pstm.setString(1, vehicle.getVin());
+                pstm.setString(2, vehicle.getLogin());
+                pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private void initTable(Connection con) {

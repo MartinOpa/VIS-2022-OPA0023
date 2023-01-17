@@ -11,8 +11,8 @@ import java.util.List;
 import domain_layer.Client;
 import domain_layer.Reservation;
 
-public class ReservationsDB {
-    public ReservationsDB() {
+public class ReservationsMapper {
+    public ReservationsMapper() {
         
         try(Connection con = getConnection()) {
             initTable(con);
@@ -40,10 +40,12 @@ public class ReservationsDB {
             e.printStackTrace();
         }
         
+        // if(admin) -> return all
         if (loginInput.equals("admin")) {
             return reservations;
         }
         
+        // get reservations by user login -> FK
         for (Reservation element : reservations) {
             if (element.getLogin().equals(loginInput)) {
                 cleanReservations.add(element);
@@ -54,9 +56,10 @@ public class ReservationsDB {
     }
 
     public void save(Reservation reservation) {
+        // save reservation into DB
         try( Connection con = getConnection()) {
             PreparedStatement pstm = con.prepareStatement("INSERT INTO reservation (login, dateTimeRes, vin, issue) VALUES (?, ?, ?, ?)");
-                pstm.setString(1, reservation.getLogin());
+                pstm.setString(1, reservation.getLogin()); // FK
                 pstm.setString(2, reservation.getDateTime());
                 pstm.setString(3, reservation.getVin());
                 pstm.setString(4, reservation.getIssue());
@@ -68,16 +71,43 @@ public class ReservationsDB {
     }
     
     public List<Reservation> filter(String parameter, Client client) {
+        // filter the logged in user's List<Reservation> by the given parameter
         List<Reservation> list = client.getReservationList();
         List<Reservation> filteredList = new LinkedList<>();
         for (Reservation reservation : list) {
-            if(reservation.getLogin().matches(".*" + parameter + ".*") || reservation.getDateTime().matches(".*" + parameter + ".*")
-                    || reservation.getVin().matches(".*" + parameter + ".*") || reservation.getIssue().matches(".*" + parameter + ".*")) {
+            if(reservation.getDateTime().matches(".*" + parameter + ".*")
+                    || reservation.getVin().matches(".*" + parameter + ".*")
+                    || reservation.getIssue().matches(".*" + parameter + ".*")) {
                 filteredList.add(reservation);
             }
         }
         
         return filteredList;
+    }
+    
+    public void delete(Reservation reservation) {
+        try( Connection con = getConnection()) {
+            PreparedStatement pstm = con.prepareStatement("DELETE FROM reservation WHERE login = ? AND dateTimeRes = ? AND vin = ?");
+                pstm.setString(1, reservation.getLogin()); // FK
+                pstm.setString(2, reservation.getDateTime());
+                pstm.setString(3, reservation.getVin());
+                pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public boolean checkIfAvailable(String dateTimeRes) {
+        Client client = new Client(0, "admin", null, null, null, 0);
+        List<Reservation> tempList = client.getReservationDB().load(client);
+        
+        for (Reservation element : tempList) {
+            if (dateTimeRes.equals(element.getDateTime())) {
+                return false;
+            }
+        }
+        
+        return true;
     }
 
     private void initTable(Connection con) {

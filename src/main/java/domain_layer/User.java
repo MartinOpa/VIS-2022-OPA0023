@@ -13,7 +13,7 @@ public abstract class User {
         return this.accountType;
     }
     
-    int getID() {
+    public int getID() {
         return this.ID;
     }
     

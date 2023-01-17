@@ -17,6 +17,7 @@ import java.util.List;
 public class LoginValidation {
     public LoginValidation(){}
     
+    // password hash
     private static String encrypt(String input) {
         try {
             MessageDigest md = MessageDigest.getInstance("SHA-512");
@@ -36,7 +37,7 @@ public class LoginValidation {
         }
     }
     
-    //login
+    // login -> identity field
     public boolean checkCredentials(String loginInput, String passwordInput) {
         for (String element : getData()) {
             int space = element.indexOf(" ");
@@ -56,6 +57,7 @@ public class LoginValidation {
         return false;
     }
     
+    // login -> identity field
     private List<String> getData() {
         Path p = Paths.get("./src/main/resources/users.txt");
         List<String> result = new ArrayList<String>();
@@ -74,6 +76,7 @@ public class LoginValidation {
         return result;
     }
     
+    // login -> identity field
     public int checkDuplicateLogin(String loginInput) {
         int ID = 0;
         for (String element : getData()) {
@@ -103,7 +106,7 @@ public class LoginValidation {
         }
     }
     
-    //reset
+    // login -> identity field for resetting the password
     public boolean tryPasswordReset(String loginInput, String newpassword) {
         int ID = -1;
         int saveID = -1;

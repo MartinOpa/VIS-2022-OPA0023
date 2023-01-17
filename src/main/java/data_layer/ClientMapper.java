@@ -12,8 +12,8 @@ import java.util.List;
 import domain_layer.Address;
 import domain_layer.Client;
 
-public class ClientDB {
-    public ClientDB() {
+public class ClientMapper {
+    public ClientMapper() {
         
         try(Connection con = getConnection()) {
             initTable(con);
@@ -46,6 +46,7 @@ public class ClientDB {
             e.printStackTrace();
         }
         
+        // get client by login
         for (Client element : clients) {
             if (element.getLogin().equals(loginInput)) {
                 client = element;
@@ -58,6 +59,7 @@ public class ClientDB {
 
     public void save(Client client) {
         try( Connection con = getConnection()) {
+            // save client into DB
             PreparedStatement pstm = con.prepareStatement("INSERT INTO client (login, firstName, lastName, street, city, postalCode, phone) VALUES (?, ?, ?, ?, ?, ?, ?)");
             Address address = client.getAddress();
             String street = address.getStreet();
@@ -73,13 +75,48 @@ public class ClientDB {
                 pstm.execute();
         } catch (SQLException e) {
             e.printStackTrace();
+        }        
+    }
+    
+    public void update(Client client) {
+        try( Connection con = getConnection()) {
+            // update client info
+            PreparedStatement pstm = con.prepareStatement("UPDATE client "
+                    + "SET login = ?, SET firstName = ?, SET lastName = ?,"
+                    + "SET street = ?, SET city = ?, SET postalCode = ?, SET phone = ?"
+                    + " WHERE ID = ?");
+            Address address = client.getAddress();
+            String street = address.getStreet();
+            String city = address.getCity();
+            String postalCode = address.getPostalCode();
+                pstm.setString(1, client.getLogin());
+                pstm.setString(2, client.getFirstName());
+                pstm.setString(3, client.getLastName());
+                pstm.setString(4, street);
+                pstm.setString(5, city);
+                pstm.setString(6, postalCode);
+                pstm.setInt(7, client.getPhone());
+                pstm.setInt(8, client.getID());
+                pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }        
+    }
+    
+    public void delete(Client client) {
+        try( Connection con = getConnection()) {
+            // update client info
+            PreparedStatement pstm = con.prepareStatement("DELETE FROM client WHERE ID = ?");
+                pstm.setInt(1, client.getID());
+                pstm.execute();
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
-        
     }
 
     private void initTable(Connection con) {
         Statement stmt;
-        try {//login, firstName, lastName, street, city, postalCode, phone
+        try {
             stmt = con.createStatement();
             stmt.execute("CREATE TABLE client ("
                     + "   ID INT NOT NULL GENERATED ALWAYS AS IDENTITY,"

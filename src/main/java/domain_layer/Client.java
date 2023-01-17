@@ -2,14 +2,14 @@ package domain_layer;
 
 import java.util.List;
 
-import data_layer.ClientDB;
-import data_layer.ReservationsDB;
-import data_layer.VehicleDB;
+import data_layer.ClientMapper;
+import data_layer.ReservationsMapper;
+import data_layer.VehicleMapper;
 
 public class Client extends User {
-    private ClientDB ClientDB;
-    private ReservationsDB ReservationDB;
-    private VehicleDB VehicleDB;
+    private ClientMapper ClientDB;
+    private ReservationsMapper ReservationDB;
+    private VehicleMapper VehicleDB;
     private List<Vehicle> VehicleList;
     private List<Reservation> ReservationList;
     private LoginValidation LoginValidation;
@@ -26,21 +26,21 @@ public class Client extends User {
         this.lastName = lastName;
         this.address = address;
         this.phone = phone;
-        this.ClientDB = new ClientDB();
-        this.ReservationDB = new ReservationsDB();
-        this.VehicleDB = new VehicleDB();
+        this.ClientDB = new ClientMapper();
+        this.ReservationDB = new ReservationsMapper();
+        this.VehicleDB = new VehicleMapper();
         this.LoginValidation = new LoginValidation();
     }
     
-    public ClientDB getClientDB() {
+    public ClientMapper getClientDB() {
         return this.ClientDB;
     }
     
-    public ReservationsDB getReservationDB() {
+    public ReservationsMapper getReservationDB() {
         return this.ReservationDB;
     }
     
-    public VehicleDB getVehicleDB() {
+    public VehicleMapper getVehicleDB() {
         return this.VehicleDB;
     }
     
@@ -61,18 +61,10 @@ public class Client extends User {
     }
     
     public boolean checkIfAvailable(String dateTime) {
-        List<Reservation> tempList = this.ReservationDB.load(new Client(0, "admin", null, null, null, 0));
-        
-        for (Reservation element : tempList) {
-            if (dateTime.equals(element.getDateTime())) {
-                return false;
-            }
-        }
-        
-        return true;
+        return this.ReservationDB.checkIfAvailable(dateTime);
     }
     
-    public void save(Client client) {
+    public void save(Client client) {       
         this.ClientDB.save(client);
     }
     
