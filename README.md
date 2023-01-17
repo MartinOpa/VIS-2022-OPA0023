@@ -29,3 +29,10 @@ Jednotlivé třídy:
 
 Obsahuje připojení na databázi ApacheDerby a metody potřebné pro její využití a filtrování výsledků.
 Nachází se v src/main/java/data_layer.
+
+## Login interface
+![alt text](https://github.com/MartinOpa/VIS-2022-OPA0023/blob/master/ukazka1.png?raw=true)
+## Vyhledávání ve vozidlech
+![alt text](https://github.com/MartinOpa/VIS-2022-OPA0023/blob/master/ukazka2.png?raw=true)
+## Vytváření rezervace
+![alt text](https://github.com/MartinOpa/VIS-2022-OPA0023/blob/master/ukazka3.png?raw=true)
